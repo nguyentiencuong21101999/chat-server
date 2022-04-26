@@ -17,11 +17,7 @@ export class CreateUserDTO {
     @Matches(new RegExp('^((?=.*[0-9])(?=.*[a-zA-Z]).{6,})$'))
     password: string
     @Expose()
-    @Matches(
-        new RegExp(
-            '^(?:\\+?(61))? ?(?:\\((?=.*\\)))?(0?[2-57-8])\\)? ?(\\d\\d(?:[- ](?=\\d{3})|(?!\\d\\d[- ]?\\d[- ]))\\d\\d[- ]?\\d[- ]?\\d{3})$'
-        )
-    )
+    @Matches(new RegExp(/^[0-9]{10,10}$/))
     phoneNumber: string
 
     @Expose()

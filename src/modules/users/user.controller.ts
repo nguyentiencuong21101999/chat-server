@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express'
 import { ResponseWrapper } from '../../helpers/response.wrapper'
-import { AuthService } from '../auth/auth.service'
+import { AuthRequest, AuthService } from '../auth/auth.service'
 import { BodyRequest } from '../base/base.request'
 import { CreateUserDTO } from './dtos/user-create.dto'
 import { SignInDTO } from './dtos/user.dto'
@@ -36,13 +36,25 @@ export class UserController {
         next: NextFunction
     ) => {
         try {
-            console.log(req.body)
             const user = await this.userService.signIn(req.body)
             const token = await this.authService.signToken(user.userId)
+
             user.accessToken = token
             res.send(new ResponseWrapper(user, null, null))
         } catch (err) {
-            console.log(err)
+            next(err)
+        }
+    }
+
+    getProfile = async (
+        req: AuthRequest,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const user = await this.userService.getProfile(req.userId)
+            res.send(new ResponseWrapper(user, null, null))
+        } catch (err) {
             next(err)
         }
     }

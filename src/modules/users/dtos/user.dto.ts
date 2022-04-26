@@ -4,7 +4,7 @@ import { User } from '../models/user.model'
 import { UserDeviceDTO } from './user-device.dto'
 
 export class SignInDTO {
-    username: string
+    userName: string
     password: string
     tokenFireBase: string
 
@@ -27,7 +27,7 @@ export class UserDTO {
     @Expose()
     dob: string
     @Expose()
-    fullname: string
+    fullName: string
     @Expose()
     phoneNumber: string
     @Expose()

@@ -34,12 +34,11 @@ app.use('/users', userRouter)
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
-    console.log('========', err)
     handleError(err, res)
 })
 
 app.listen(port, async () => {
-    await database.sync({ alter: true })
+    //  await database.sync({ alter: true })
     await redisService.connect()
     return logger.info(`Server is listening at port ${port}`)
 })

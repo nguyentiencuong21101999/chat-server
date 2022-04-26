@@ -1,4 +1,5 @@
 import { instanceToPlain, plainToInstance } from 'class-transformer'
+import { Request } from 'express'
 import jwt from 'jsonwebtoken'
 import { Config } from '../../configs'
 import { Errors } from '../../helpers/error'
@@ -7,6 +8,10 @@ import { RedisService } from '../redis/redis.service'
 export class AuthPayload {
     userId: number
 }
+export interface AuthRequest extends Request {
+    userId: number
+}
+
 export class AuthService {
     conf: Config
     redis: RedisService
@@ -17,7 +22,10 @@ export class AuthService {
     }
 
     signToken = async (userId: number) => {
-        const sign = jwt.sign(userId.toString(), this.conf.secretKey)
+        const sign = jwt.sign(
+            { userId: userId.toString() },
+            this.conf.secretKey
+        )
         await this.redis.addToken(userId, sign)
         return sign
     }
@@ -26,10 +34,12 @@ export class AuthService {
         const decoded = jwt.verify(token, this.conf.secretKey, {
             complete: true,
         })
+
         const authPayload = plainToInstance(
             AuthPayload,
             instanceToPlain(decoded.payload)
         )
+
         const tokens = await this.redis.getTokens(authPayload.userId)
         if (!tokens.has(token)) {
             throw Errors.Unauthorized
