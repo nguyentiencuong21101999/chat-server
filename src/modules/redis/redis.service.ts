@@ -24,6 +24,7 @@ export class RedisService {
             WD_ACCESS_TOKEN_KEY,
             userId.toString()
         )
+
         if (res != null) {
             return new Set(res.split(','))
         }
@@ -33,17 +34,16 @@ export class RedisService {
     async setToken(userId: number, token: string) {
         await this.client.hSet(WD_ACCESS_TOKEN_KEY, userId.toString(), token)
     }
-
     async addToken(userId: number, token: string) {
         const tokens = await this.getTokens(userId)
         tokens.add(token)
-        await this.setToken(userId, [...token].join(','))
+        await this.setToken(userId, [...tokens].join(','))
     }
 
     async removeToken(userId: number, token: string) {
         const tokens = await this.getTokens(userId)
         tokens.delete(token)
-        await this.setToken(userId, [...token].join(','))
+        await this.setToken(userId, [...tokens].join(','))
     }
 }
 

@@ -16,6 +16,8 @@ export interface Config {
     genwebClientKey: string
     genwebSecretKey: string
     awsS3Location: string
+    fcmUri: string
+    fcmServerKey: string
 }
 
 export const configs: Config = {
@@ -30,6 +32,8 @@ export const configs: Config = {
     genwebClientKey: env.GENWEB_CLIENT_KEY,
     genwebSecretKey: env.GENWEB_SECRET_KEY,
     awsS3Location: env.AWS_S3_LOCATION,
+    fcmUri: env.FCM_URI,
+    fcmServerKey: env.FCM_SERVER_KEY,
 }
 
 export const isProduction = () => {

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import { database } from '../../database/connection'
 import { Errors } from '../../helpers/error'
 import { genFullName } from '../../helpers/utils'
-import { ColossalUserService } from '../colossal-users/colossal-user.service'
+
 import { CreateUserDTO } from './dtos/user-create.dto'
 import UserDevice from './models/user-device.model'
 import { User } from './models/user.model'
@@ -10,11 +10,7 @@ import { SignInDTO, UserDTO } from './dtos/user.dto'
 import { UserDeviceDTO } from './dtos/user-device.dto'
 
 export class UserService {
-    colossalUserService: ColossalUserService
-
-    constructor(colossalUserService: ColossalUserService) {
-        this.colossalUserService = colossalUserService
-    }
+   // constructor() {}
 
     async signUp(params: CreateUserDTO) {
         // validate user info
@@ -47,7 +43,7 @@ export class UserService {
 
     async signIn(params: SignInDTO) {
         const user = await User.findOne({
-            where: { userName: params.username },
+            where: { userName: params.userName },
         })
 
         if (user == null) {
@@ -69,6 +65,9 @@ export class UserService {
         }
         const res = UserDTO.fromUser(user)
         return res
+    }
+    async getProfile(userId: number) {
+        return await User.findOne({ where: { userId: userId } })
     }
 
     private async validateUserRegistrationInfo(params: CreateUserDTO) {
