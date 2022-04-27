@@ -37,7 +37,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     handleError(err, res)
 })
 
-app.listen(port, async () => {
+app.listen(process.env.PORT || port, async () => {
     // await database.sync({ alter: true })
     await redisService.connect()
     return logger.info(`Server is listening at port ${port}`)

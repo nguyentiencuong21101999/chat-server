@@ -19,8 +19,11 @@ export interface Config {
 
 export const configs: Config = {
     port: '4000',
-    dbURI: 'mysql://root:AbCd@1234@localhost:3306/chat', //change
-    redisURI: 'redis://localhost:6379',
+    // dbURI: 'mysql://root:AbCd@1234@localhost:3306/chat', //change
+    //redisURI: 'redis://localhost:6379',
+    dbURI: 'mysql://sql3488537:RzUeVJZ5aP@sql3.freemysqlhosting.net:3306/sql3488537',
+    redisURI:
+        'redis://tiencuong0:Tiencuong@123@redis-15461.c52.us-east-1-4.ec2.cloud.redislabs.com:15461',
     secretKey: 'zzZA4oMsjw.rzgMVwnrD!PMPHp2RuZe@',
     fcmUri: 'https://fcm.googleapis.com/fcm/send ',
     fcmServerKey:

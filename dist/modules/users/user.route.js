@@ -1,0 +1,32 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRouter = void 0;
+const express_1 = __importDefault(require("express"));
+const configs_1 = require("../../configs");
+const auth_middleware_1 = require("../auth/auth.middleware");
+const auth_service_1 = require("../auth/auth.service");
+const mail_service_1 = require("../mail/mail.service");
+const notification_service_1 = require("../notification/notification.service");
+const mail_queue_service_1 = require("../queue/mail-queue.service");
+const notification_queue_service_1 = require("../queue/notification-queue.service");
+const redis_service_1 = require("../redis/redis.service");
+const user_controller_1 = require("./user.controller");
+const user_middleware_1 = require("./user.middleware");
+const user_service_1 = require("./user.service");
+const notificationService = new notification_service_1.NotificationService(configs_1.configs, notification_queue_service_1.notificationQueue);
+const authService = new auth_service_1.AuthService(configs_1.configs, redis_service_1.redisService);
+const mailService = new mail_service_1.MailService(configs_1.configs, mail_queue_service_1.mailQueue);
+const userService = new user_service_1.UserService(notificationService, authService, mailService);
+const userController = new user_controller_1.UserController(authService, userService);
+const userMiddleware = new user_middleware_1.UserMiddleWare();
+const authMiddleware = new auth_middleware_1.AuthMiddleWare(authService);
+exports.userRouter = express_1.default.Router();
+exports.userRouter.post('/sign-up', userMiddleware.tranformAndValidateCreateUserReq, userController.signUp);
+exports.userRouter.post('/sign-in', userController.signIn);
+exports.userRouter.get('/profile', authMiddleware.authorization, userController.getProfile);
+exports.userRouter.post('/sign-out', authMiddleware.authorization, userController.signOut);
+exports.userRouter.post('/notification', authMiddleware.authorization, userController.pushNotification);
+//# sourceMappingURL=user.route.js.map
