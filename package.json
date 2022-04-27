@@ -5,7 +5,7 @@
     "main": "dist/app.js",
     "scripts": {
         "build": "rimraf ./dist && tsc",
-        "start": "yarn build && node dist/app.js",
+        "start": "node dist/app.js",
         "start:dev": "nodemon",
         "lint": "eslint . --ext .ts",
         "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
