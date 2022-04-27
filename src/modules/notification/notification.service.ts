@@ -15,10 +15,11 @@ export class NotificationService {
             notification: {
                 title: params.title,
                 body: params.body,
+                click_action: params.click_action,
             },
             registration_ids: params.fcm_tokens,
         }
-
+      
         await axios.post(this.config.fcmUri, JSON.stringify(data), {
             headers: {
                 Authorization: 'key=' + this.config.fcmServerKey,

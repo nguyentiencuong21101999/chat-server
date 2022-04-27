@@ -5,14 +5,14 @@ import { QueryTypes, Transactionable } from 'sequelize'
 import { Sequelize } from 'sequelize-typescript'
 import { configs } from '../configs'
 import { logger } from '../helpers/logger'
-import { UserAdvance } from '../modules/users/models/user-advance.model'
+// import { UserAdvance } from '../modules/users/models/user-advance.model'
 import UserDevice from '../modules/users/models/user-device.model'
 import { User } from '../modules/users/models/user.model'
 
 export const database = new Sequelize(configs.dbURI, {
     dialect: 'mysql',
     logging: (msg) => logger.info(msg),
-    models: [User, UserAdvance, UserDevice],
+    models: [User, UserDevice],
 })
 export interface CustomQueryOptions extends Transactionable {
     replacements?: unknown[]

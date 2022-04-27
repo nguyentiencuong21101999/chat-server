@@ -9,4 +9,10 @@ export class UserDeviceDTO {
 
     @Expose()
     tokenFireBase: string
+
+    @Expose()
+    token: string
+
+    @Expose()
+    email: string
 }

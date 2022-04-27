@@ -26,7 +26,7 @@ export class CreateUserDTO {
 
     @Expose()
     @Transform(ToTrim)
-    @Matches(new RegExp("^[a-zA-Z][a-zA-Z '-]*$"))
+    //  @Matches(new RegExp("^[a-zA-Z][a-zA-Z '-]*$"))
     firstName: string
 
     @Expose()
@@ -37,7 +37,7 @@ export class CreateUserDTO {
 
     @Expose()
     @Transform(ToTrim)
-    @Matches(new RegExp("^[a-zA-Z][a-zA-Z '-]*$"))
+    //@Matches(new RegExp("^[a-zA-Z][a-zA-Z '-]*$"))
     lastName: string
 
     @Expose()
