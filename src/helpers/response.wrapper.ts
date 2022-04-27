@@ -16,7 +16,6 @@ export class ResponseWrapper {
         this.pagination = pagination
     }
 }
-
 export interface Pagination {
     total: number
     page: number

@@ -22,4 +22,12 @@ export default class UserDevice extends BaseModel<UserDevice> {
     @AllowNull(false)
     @Column({ field: 'UserId', type: DataTypes.INTEGER({ length: 11 }) })
     userId: number
+
+    @AllowNull(false)
+    @Column({ field: 'Token', type: DataTypes.STRING({ length: 128 }) })
+    token: string
+
+    @AllowNull(false)
+    @Column({ field: 'Email', type: DataTypes.STRING({ length: 128 }) })
+    email: string
 }

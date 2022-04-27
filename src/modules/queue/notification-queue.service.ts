@@ -14,7 +14,7 @@ const ioRedis = new IORedis(configs.redisURI, {
 export const notificationQueue = new Queue(NotificationQueueName, {
     connection: ioRedis,
     defaultJobOptions: {
-        removeOnComplete: true,
+        removeOnComplete: false,
         removeOnFail: 1000,
     },
 })

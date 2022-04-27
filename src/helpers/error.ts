@@ -55,6 +55,9 @@ export const Errors = {
         'Invalid password.'
     ),
 }
+export const Success = {
+    SignOut: new ErrorResp('error.signOutSuccess', 'Sign out success.'),
+}
 
 export const handleError = (err: Error, res: Response) => {
     if (err instanceof ErrorResp) {

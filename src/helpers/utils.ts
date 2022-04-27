@@ -1,5 +1,4 @@
 import { TransformFnParams } from 'class-transformer'
-import { fullUrl } from './s3'
 
 /** Transform 0/1 to true/false */
 export const ToBoolean = (param: TransformFnParams) => {
@@ -12,7 +11,6 @@ export const ToBoolean = (param: TransformFnParams) => {
 }
 
 /** Transform path to full location url */
-export const ToFullUrl = (param: TransformFnParams) => fullUrl(param.value)
 
 /** Transform to trim text */
 export const ToTrim = (param: TransformFnParams) =>
